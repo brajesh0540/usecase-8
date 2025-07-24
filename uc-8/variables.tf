@@ -30,3 +30,9 @@ variable "alb_listener_arn" {
   
 }
 
+variable "ecs_target_group_arn" {
+  description = "The ARN of the ECS target group"
+  type        = string
+  
+}
+
