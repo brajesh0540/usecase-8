@@ -25,13 +25,6 @@ module "ecs" {
 }
 
 module "ecr_patient" {
-    source = "./modules/microservices/patient-service"
-    repository_name = "patient-service-repo"
-}
-
-module "ecr_appointment" {
-    source = "./modules/microservices/appointment-service"
-    repository_name = "appointment-service-repo"
-  
+    source = "./modules/microservices"
 }
 
