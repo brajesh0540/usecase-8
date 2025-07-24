@@ -24,4 +24,9 @@ variable "desired_count" {
   
 }
 
+variable "alb_listener_arn" {
+  description = "ARN of the ALB listener for ECS service"
+  type        = string
+  
+}
 

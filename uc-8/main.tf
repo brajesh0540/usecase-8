@@ -22,6 +22,7 @@ module "ecs" {
     desired_count = var.desired_count
     vpc_id = module.vpc.vpc_id
     subnet_ids = module.public_subnet.subnet_ids
+    alb_listener_arn = module.alb.alb_listener_arn
 }
 
 module "ecr_patient" {

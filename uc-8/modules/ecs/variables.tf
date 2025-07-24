@@ -37,5 +37,11 @@ variable "image_id" {
   
 }
 
+variable "alb_listener_arn" {
+  description = "The ARN of the ALB listener"
+  type        = string
+  
+}
+
 
 

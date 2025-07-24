@@ -47,7 +47,7 @@ resource "aws_ecs_task_definition" "task" {
     target_group_arn = aws_lb_target_group.ecs_target_group.arn
     container_name   = "appointment-service"
     container_port   = var.container_port
+
   }
-  depends_on = [aws_lb_listener.ecs_listener]
 }
 

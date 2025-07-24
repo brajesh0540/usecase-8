@@ -38,3 +38,7 @@ resource "aws_subnet" "Private_subnet" {
   
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+

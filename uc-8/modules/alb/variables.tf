@@ -22,3 +22,10 @@ variable "vpc_id" {
     type        = string
   
 }
+
+variable "alb_listener_arn" {
+    description = "ARN of the ALB listener for ECS service"
+    type        = string
+    default     = ""
+  
+}
