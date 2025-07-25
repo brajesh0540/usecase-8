@@ -8,7 +8,7 @@ on:
       - main
     paths:
       - 'uc-8/**'
-      - '.github/workflows/cicd8.yml'
+      - '.github/workflows/main.yml'
 
 jobs:
   build-and-push:
@@ -22,7 +22,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: uc-8
+        working-directory: ./uc-8
     steps:
 
       - name: terraform-docs
