@@ -66,7 +66,7 @@ resource "aws_lb_listener" "alb_listner" {
 }
 
 resource "aws_lb_listener_rule" "patients" {
-    listener_arn = aws_lb_listener_rule.http.arn
+    listener_arn = aws_lb_listener.http.arn
     priority     = 10
 
     action {
