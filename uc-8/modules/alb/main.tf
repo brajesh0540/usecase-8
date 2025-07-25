@@ -49,8 +49,8 @@ resource "aws_lb_target_group" "appointments" {
   
 }
 
-resource "aws_lb_listener" "alb_listner" {
-    load_balancer_arn = aws_lb_listener.alb_listner.arn
+resource "aws_lb_listener" "http" {
+    load_balancer_arn = aws_lb.ecs_alb.arn
     port              = 80
     protocol          = "HTTP"
 
@@ -58,8 +58,8 @@ resource "aws_lb_listener" "alb_listner" {
         type             = "fixed-response"
         fixed_response {
             content_type = "text/plain"
-            message_body = "ALB is healthy"
-            status_code  = "200"
+            message_body = "not found"
+            status_code  = "404"
         }
         
     }
