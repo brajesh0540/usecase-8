@@ -22,7 +22,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./uc-8
+        working-directory: uc-8
     steps:
 
       - name: terraform-docs
