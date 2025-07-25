@@ -1,12 +1,32 @@
-variable "cidr_block" {
+variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
+  default     = "10.0.0.0/16"
   
 }
 
-variable "ecr_repo_name" {
-  description = "Name of the ECR repository"
+variable "vpc_name" {
+  description = "Name of the VPC"
   type        = string
-  default     = "my-ecr-repo"
+  default     = "my-vpc"
+  
+}
+
+variable "public_subnets" {
+  description = "List of public subnets for the VPC"
+  type        = list(string)
+
+  
+}
+
+variable "private_subnets" {
+  description = "List of private subnets for the VPC"
+  type        = list(string)
+  
+}
+
+variable "azs" {
+  description = "values for availability zones"
+  type        = list(string)
   
 }

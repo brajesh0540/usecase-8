@@ -1,15 +1,14 @@
 module "alb" {
     source = "./modules/alb"
     name = "ecs-alb"
-    public_subnet = module.vpc.public_subnet_ids
+    public_subnets = module.vpc.public_subnet_ids
     vpc_id = module.vpc.vpc_id
     alb_sg_id = module.sg.alb_sg_id
 }
 
 module "ecr" {
     source = "./modules/ecr"
-    repo_name = var.ecr_repo_name
-  
+    ecr_repo_name = var.ecr_repo_name
 }
 
 module "vpc" {
@@ -26,21 +25,22 @@ module "vpc" {
 module "ecs" {
     source = "./modules/ecs"
     cluster_name = var.cluster_name
-    subnets = module.vpc.private_subnet_ids
-    security_groups = [module.sg.ecs_sg_id]
-    task_role_arn = var.execution_role_arn
+    subnet_ids = module.vpc.private_subnet_ids
+    security_groups = [module.ecs_sg.ecs_sg_id]
+    task_arn_role = var.execution_role_arn
     execution_role_arn = var.execution_role_arn
+    ecs_target_group_arn = module.alb.appointments_target_group_arn
 
     services = {
         appointment-service = {
-            image = module.ecr.repo_url
+            image = module.ecr.repositories["node-appointment"]
             cpu = 256
             memory = 512
             container_port = 8
             target_group_arn = module.alb.appointments_target_group_arn
         }
         patient-service = {
-            image = "${module.ecr.repo_url}"
+            image = module.ecr.repositories["node-patient"]
             cpu = 256
             memory = 512
             container_port = 80

@@ -42,7 +42,7 @@ variable "security_groups" {
   
 }
 
-variable "task_role_arn" {
+variable "task_arn_role" {
   description = "The ARN of the task role for the ECS task."
   type        = string
   

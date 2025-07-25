@@ -4,3 +4,14 @@ variable "vpc_id" {
   
 }
 
+variable "alb_sg_name" {
+  description = "The name of the security group for the ALB"
+  type        = string
+  
+}
+
+variable "ecs_sg_name" {
+  description = "The name of the security group for ECS services"
+  type        = string
+  
+}
