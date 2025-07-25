@@ -1,38 +1,45 @@
-variable "cidr_block" {
+variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
   
 }
 
-variable "image_id" {
-  description = "The image ID for the second container in the ECS task."
+variable "vpc_name" {
+  description = "Name of the VPC"
   type        = string
   
 }
 
-variable "container_port" {
-    description = "The port on which the container will listen."
-    type        = number
-    default     = 80
+variable "public_subnets" {
+  description = "List of public subnets for the VPC"
+  type        = list(string)
   
 }
 
-variable "desired_count" {
-    description = "The desired number of instances of the task to run."
-    type        = number
-    default     = 1
+variable "private_subnets" {
+  description = "List of private subnets for the VPC"
+  type        = list(string)
   
 }
 
-variable "alb_listener_arn" {
-  description = "ARN of the ALB listener for ECS service"
+variable "alb_sg_name" {
+  description = "Security group ID for the ALB"
   type        = string
   
 }
 
-variable "ecs_target_group_arn" {
-  description = "The ARN of the ECS target group"
+variable "ecs_sg_name" {
+  description = "Security group ID for the ECS service"
   type        = string
   
 }
+
+variable "ecr_repo_name" {
+  description = "The desired number of instances for the ECS service"
+  type        = number
+  default     = 1
+  
+}
+
+
 

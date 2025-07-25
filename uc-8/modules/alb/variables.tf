@@ -1,20 +1,6 @@
-variable "public_subnet" {
+variable "public_subnets" {
     description = "Public subnet for the ALB"
     type        = list(string)
-    default     = []
-}
-
-variable "private_subnet" {
-    description = "Private subnet for the ALB"
-    type        = list(string)
-    default     = []
-}
-
-variable "env" {
-    description = "Environment variable for tagging"
-    type        = string
-    default     = "dev"
-  
 }
 
 variable "vpc_id" {
@@ -23,9 +9,14 @@ variable "vpc_id" {
   
 }
 
-variable "alb_listener_arn" {
-    description = "ARN of the ALB listener for ECS service"
+variable "alb_sg_id" {
+    description = "Security group ID for the ALB"
     type        = string
-    default     = ""
+}
+
+variable "name" {
+    description = "Name of the ALB and target group"
+    type        = string
+    default     = "ecs-alb"
   
 }

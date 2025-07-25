@@ -1,32 +1,59 @@
 module "alb" {
     source = "./modules/alb"
+    name = "ecs-alb"
     public_subnet = module.vpc.public_subnet_ids
     vpc_id = module.vpc.vpc_id
+    alb_sg_id = module.sg.alb_sg_id
+}
+
+module "ecr" {
+    source = "./modules/ecr"
+    repo_name = var.ecr_repo_name
   
 }
 
 module "vpc" {
     source = "./modules/vpc"
-    cidr_block = var.cidr_block
+    vpc_name = var.vpc_name
+    vpc_cidr = var.vpc_cidr
+    public_subnets = var.public_subnets
+    private_subnets = var.private_subnets
+    azs = var.azs
 }
 
-module "iam" {
-    source = "./modules/iam"
-  
-}
+
 
 module "ecs" {
     source = "./modules/ecs"
-    image_id = var.image_id
-    container_port = var.container_port
-    desired_count = var.desired_count
+    cluster_name = var.cluster_name
+    subnets = module.vpc.private_subnet_ids
+    security_groups = [module.sg.ecs_sg_id]
+    task_role_arn = var.execution_role_arn
+    execution_role_arn = var.execution_role_arn
+
+    services = {
+        appointment-service = {
+            image = module.ecr.repo_url
+            cpu = 256
+            memory = 512
+            container_port = 8
+            target_group_arn = module.alb.appointments_target_group_arn
+        }
+        patient-service = {
+            image = "${module.ecr.repo_url}"
+            cpu = 256
+            memory = 512
+            container_port = 80
+            target_group_arn = module.alb.patients_target_group_arn
+        }
+
+    }
+}
+
+module "sg" {
+    source = "./modules/sg"
     vpc_id = module.vpc.vpc_id
-    subnet_ids = module.vpc.public_subnet_ids
-    alb_listener_arn = module.alb.alb_listener_arn
-    ecs_target_group_arn = module.alb.ecs_target_group_arn
+    alb_sg_name = var.alb_sg_name
+    ecs_sg_name = var.ecs_sg_name
+  
 }
-
-output "ecs_target_group_arn" {
-  value = module.alb.ecs_target_group_arn
-}
-

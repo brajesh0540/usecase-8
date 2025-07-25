@@ -1,5 +1,6 @@
-resource "aws_ecr_repository" "this" {
-  name                 = var.repository_name
+resource "aws_ecr_repository" "ecr" {
+  for_each = toset(var.repo_name)
+  name                 = each.value
   image_tag_mutability = "MUTABLE"
 
   encryption_configuration {

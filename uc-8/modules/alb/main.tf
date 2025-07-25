@@ -1,22 +1,19 @@
 resource "aws_lb" "ecs_alb" {
-    name               = "my-alb"
+    name               = var.name
     internal           = false
     load_balancer_type = "application"
-    security_groups    = [aws_security_group.alb_sg.id]
-    subnets            = var.public_subnet
+    security_groups    = [var.alb_sg_id]
+    subnets            = var.public_subnets
     
     tags = {
-        Name = "my-alb"
-        env  = var.env
+        Name = var.name
     }
-
-  
 }
 
 
 
-resource "aws_lb_target_group" "ecs_target_group" {
-    name     = "my-target-group"
+resource "aws_lb_target_group" "patients" {
+    name     = "${var.name}-tg-patients"
     port     = 80
     protocol = "HTTP"
     vpc_id   = var.vpc_id
@@ -24,31 +21,79 @@ resource "aws_lb_target_group" "ecs_target_group" {
 
     health_check {
         path                = "/health"
+        protocol            = "HTTP"
+        matcher            = "200"
         interval            = 30
         timeout             = 5
         healthy_threshold   = 2
         unhealthy_threshold = 2
     }
-
-    tags = {
-        Name = "my-target-group"
-        env  = var.env
-    }
 }
 
-resource "aws_lb_listener" "alb_listener" {
-    load_balancer_arn = aws_lb.ecs_alb.arn
+resource "aws_lb_target_group" "appointments" {
+    name     = "${var.name}-tg-appointments"
+    port     = 80
+    protocol = "HTTP"
+    vpc_id   = var.vpc_id
+    target_type = "ip"
+
+    health_check {
+        path                = "/health"
+        protocol            = "HTTP"
+        matcher            = "200"
+        interval            = 30
+        timeout             = 5
+        healthy_threshold   = 2
+        unhealthy_threshold = 2
+    }
+  
+}
+
+resource "aws_lb_listener" "http" {
+    load_balancer_arn = aws_lb.this.arn
     port              = 80
     protocol          = "HTTP"
 
     default_action {
+        type             = "fixed-response"
+        fixed_response {
+            content_type = "text/plain"
+            message_body = "ALB is healthy"
+            status_code  = "200"
+        }
+        
+    }
+}
+
+resource "aws_lb_listener_rule" "patients" {
+    listener_arn = aws_lb_listener.http.arn
+    priority     = 10
+
+    action {
         type             = "forward"
-        target_group_arn = aws_lb_target_group.ecs_target_group.arn
+        target_group_arn = aws_lb_target_group.patients.arn
     }
 
-    tags = {
-        Name = "my-listener"
-        env  = var.env
+    condition {
+        path_pattern {
+            values = ["/patients*"]
+        }
     }
-  
 }
+
+resource "aws_lb_listener_rule" "appointments" {
+    listener_arn = aws_lb_listener.http.arn
+    priority     = 11
+
+    action {
+        type             = "forward"
+        target_group_arn = aws_lb_target_group.appointments.arn
+    }
+
+    condition {
+        path_pattern {
+            values = ["/appointments*"]
+        }
+    }
+}
+
