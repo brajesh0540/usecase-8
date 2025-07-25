@@ -49,8 +49,8 @@ resource "aws_lb_target_group" "appointments" {
   
 }
 
-resource "aws_lb_listener" "http" {
-    load_balancer_arn = aws_lb.this.arn
+resource "aws_lb_listener" "alb_listner" {
+    load_balancer_arn = aws_lb.alb_listner.arn
     port              = 80
     protocol          = "HTTP"
 
