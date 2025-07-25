@@ -35,7 +35,7 @@ variable "ecs_sg_name" {
 }
 
 variable "ecr_repo_name" {
-  description = "The desired number of instances for the ECS service"
+  description = "The desired number of instances for the ECS services"
   type        = list(string)
   
 }
