@@ -1,7 +1,6 @@
 output "repositories" {
   value = {
-    for repo, resource in aws_ecr_repository.ecr : 
-    repo.name => resource.repository_url
+    for repo in var.ecr_repo_name : repo => aws_ecr_repository.ecr[repo].repository_url
   }
   
 }
