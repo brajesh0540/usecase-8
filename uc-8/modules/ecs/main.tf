@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "task" {
   task_definition = aws_ecs_task_definition.task.arn
   desired_count   = var.desired_count
   load_balancer {
-    target_group_arn = var.ecs_target_group.arn
+    target_group_arn = var.ecs_target_group_arn
     container_name   = "appointment-service"
     container_port   = var.container_port
 

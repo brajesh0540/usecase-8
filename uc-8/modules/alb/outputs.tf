@@ -10,7 +10,7 @@ output "target_group_arn" {
 }
 
 output "alb_listener_arn" {
-  value = aws_lb_listener.alb_listener_arn.arn
+  value = aws_lb_listener.alb_listener.arn
 }
 
 output "ecs_target_group_arn" {

@@ -34,7 +34,7 @@ resource "aws_lb_target_group" "ecs_target_group" {
     }
 }
 
-resource "aws_alb_listener" "ecs_listener" {
+resource "aws_lb_listener" "alb_listener" {
     load_balancer_arn = aws_lb.ecs_alb.arn
     port              = 80
     protocol          = "HTTP"

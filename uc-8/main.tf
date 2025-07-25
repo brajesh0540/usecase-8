@@ -1,6 +1,6 @@
 module "alb" {
     source = "./modules/alb"
-    public_subnet = module.public_subnet.subnet_id
+    public_subnet = module.vpc.subnet_id
     vpc_id = module.vpc.vpc_id
   
 }
@@ -21,12 +21,12 @@ module "ecs" {
     container_port = var.container_port
     desired_count = var.desired_count
     vpc_id = module.vpc.vpc_id
-    subnet_ids = module.public_subnet.subnet_ids
+    subnet_ids = module.vpc.public_subnet
     alb_listener_arn = module.alb.alb_listener_arn
     ecs_target_group_arn = module.alb.ecs_target_group_arn
 }
 
 output "ecs_target_group_arn" {
-  value = aws_lb_target_group.ecs_target_group.arn
+  value = module.alb.ecs_target_group_arn
 }
 
