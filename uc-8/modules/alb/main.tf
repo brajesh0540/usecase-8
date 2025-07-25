@@ -13,6 +13,8 @@ resource "aws_lb" "ecs_alb" {
   
 }
 
+
+
 resource "aws_lb_target_group" "ecs_target_group" {
     name     = "my-target-group"
     port     = 80
