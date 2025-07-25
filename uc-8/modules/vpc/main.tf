@@ -30,7 +30,7 @@ resource "aws_subnet" "public_subnet" {
   
 }
 
-resource "aws_subnet" "Private_subnet" {
+resource "aws_subnet" "private_subnet" {
   count = 2
   vpc_id = aws_vpc.vpc.id
   cidr_block = "10.0.${count.index + 2}.0/24"
