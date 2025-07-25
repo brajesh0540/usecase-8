@@ -16,13 +16,25 @@ jobs:
 
     permissions:
       id-token: write
-      contents: read
+      contents: write
+      actions: write
+      deployments: write
 
     defaults:
       run:
         working-directory: uc-8
     steps:
-      - uses: actions/checkout@v3
+
+      - name: terraform-docs
+        uses: terraform-docs/gh-actions@v1.4.1
+
+      - name: terra documents
+        run: terraform-docs markdown table usecase-8/uc-8 --output-file README.md --output-mode inject
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      
 
       - name: Configure AWS credentials (Access Key)
         uses: aws-actions/configure-aws-credentials@v3
@@ -45,10 +57,10 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -var-file=terraform.tfvars
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var="aws_region=us-east-1"
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
 
 
         
