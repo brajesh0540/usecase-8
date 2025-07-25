@@ -50,7 +50,7 @@ resource "aws_lb_target_group" "appointments" {
 }
 
 resource "aws_lb_listener" "alb_listner" {
-    load_balancer_arn = aws_lb.alb_listner.arn
+    load_balancer_arn = aws_lb_listener.alb_listner.arn
     port              = 80
     protocol          = "HTTP"
 
@@ -66,7 +66,7 @@ resource "aws_lb_listener" "alb_listner" {
 }
 
 resource "aws_lb_listener_rule" "patients" {
-    listener_arn = aws_lb_listener.http.arn
+    listener_arn = aws_lb_listener_rule.http.arn
     priority     = 10
 
     action {
