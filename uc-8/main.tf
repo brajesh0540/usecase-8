@@ -26,7 +26,7 @@ module "ecs" {
     source = "./modules/ecs"
     cluster_name = var.cluster_name
     subnet_ids = module.vpc.private_subnet_ids
-    security_groups = [module.ecs_sg.ecs_sg_id]
+    security_groups = [module.ecs.ecs_sg_id]
     task_arn_role = var.execution_role_arn
     execution_role_arn = var.execution_role_arn
     ecs_target_group_arn = module.alb.appointments_target_group_arn
