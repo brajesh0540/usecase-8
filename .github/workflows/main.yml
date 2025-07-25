@@ -45,7 +45,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -var="aws_region=us-east-1"
+        run: terraform plan
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var="aws_region=us-east-1"
