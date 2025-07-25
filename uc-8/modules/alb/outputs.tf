@@ -5,7 +5,7 @@ output "alb_dns_name" {
 }
 
 output "appointments_target_group_arn" {
-  description = "The ARN of the ALB"
+  description = "The ARN of the ALBb"
   value       = aws_lb_target_group.appointments.arn
 }
 
