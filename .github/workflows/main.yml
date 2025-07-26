@@ -23,24 +23,10 @@ jobs:
     defaults:
       run:
         working-directory: uc-8
+        
     steps:
-
-      - name: terraform-docs
-        uses: terraform-docs/gh-actions@v1.4.1
-        with:
-          working-dir: .
-          output-file: README.md
-          output-method: inject
-          git-push: false
-
-
-      #- name: terra documents
-      #  run: terraform-docs markdown table usecase-8/uc-8 --output-file README.md --output-mode inject
-
       - name: Checkout code
         uses: actions/checkout@v3
-
-      
 
       - name: Configure AWS credentials (Access Key)
         uses: aws-actions/configure-aws-credentials@v3
