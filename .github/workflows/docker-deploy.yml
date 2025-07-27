@@ -35,5 +35,5 @@ jobs:
           pwd
           docker build -t node-appointment:cicd ./uc-8/modules/microservices
           docker images
-          docker tag node-appointment:cicd 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:node-appointment:cicd
-          docker push 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:node-appointment:cicd
+          docker tag node-appointment:cicd 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:cicd
+          docker push 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:cicd
