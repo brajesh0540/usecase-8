@@ -7,9 +7,6 @@ on:
       - 'microservices/**'    # Your Node.js apps
       - '.github/workflows/docker-deploy.yml'
 
-env:
-  AWS_REGION: us-east-1
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
