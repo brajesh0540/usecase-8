@@ -7,6 +7,10 @@ on:
       - 'microservices/**'    # Your Node.js apps
       - '.github/workflows/docker-deploy.yml'
 
+env:
+  node-appointment: 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment       # Or whatever your actual repo name is
+  IMAGE_TAG: latest
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
