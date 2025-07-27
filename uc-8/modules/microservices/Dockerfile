@@ -4,7 +4,7 @@ COPY patient-service.js .
 RUN node -v && \
     npm -v && \
     npm init -y && \
-    npm install express && \
+    npm install express
 
 EXPOSE 80
 CMD ["node", "patient-service.js"]
