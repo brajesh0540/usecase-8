@@ -36,4 +36,3 @@ jobs:
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG ./uc-8/modules/microservices
           docker tag 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:$IMAGE_TAG
           docker push 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:$IMAGE_TAG
-          
