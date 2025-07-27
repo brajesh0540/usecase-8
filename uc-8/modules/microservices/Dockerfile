@@ -1,7 +1,10 @@
 FROM node:18-alpine
 WORKDIR  /app
 COPY patient-service.js .
-RUN npm install
-COPY . .
+RUN node -v && \
+    npm -v && \
+    npm init -y && \
+    npm install express && \
+
 EXPOSE 80
 CMD ["node", "patient-service.js"]
