@@ -33,7 +33,7 @@ jobs:
       - name: Build, tag, and push Docker image
         run: |
           pwd
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG ./uc-8/modules/microservices
-          docker tag node-appointment:latest 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:$IMAGE_TAG
-          docker push 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:$IMAGE_TAG
-
+          docker build -t node-appointment:cicd ./uc-8/modules/microservices
+          docker images
+          docker tag node-appointment:cicd 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:node-appointment:cicd
+          docker push 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:node-appointment:cicd
