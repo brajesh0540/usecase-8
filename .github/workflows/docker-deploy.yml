@@ -36,3 +36,4 @@ jobs:
           docker images
           docker tag node-appointment:cicd 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:cicd
           docker push 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment:cicd
+          
