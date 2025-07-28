@@ -47,6 +47,14 @@ resource "aws_ecs_task_definition" "task" {
         }
       ]
       essential = true
+      log_configuration = {
+  log_driver = "awslogs"
+  options = {
+    awslogs-group         = "/ecs/appointment-service"
+    awslogs-region        = "us-east-1"
+    awslogs-stream-prefix = "ecs"
+  }
+}
     }
   ])
 }
