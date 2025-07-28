@@ -34,7 +34,7 @@ resource "aws_ecs_task_definition" "task" {
   cluster         = aws_ecs_cluster.ecs_cluster.id
   launch_type     = "FARGATE"
   task_definition = aws_ecs_task_definition.task[each.key].arn
-  desired_count   = 0
+  desired_count   = 1
 network_configuration {
     subnets          = var.subnet_ids
     security_groups  = var.security_groups
