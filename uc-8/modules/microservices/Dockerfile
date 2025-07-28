@@ -1,6 +1,6 @@
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR  /app
-COPY patient-service.js .
+COPY patient-service.js ./
 RUN node -v && \
     npm -v && \
     npm init -y && \
