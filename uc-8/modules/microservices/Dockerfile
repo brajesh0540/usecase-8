@@ -6,5 +6,5 @@ RUN node -v && \
     npm init -y && \
     npm install express
 
-EXPOSE 80
+EXPOSE 8080
 CMD ["node", "patient-service.js"]
