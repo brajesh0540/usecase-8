@@ -9,7 +9,6 @@ on:
 
 env:
   ECR_REPOSITORY: 443180305490.dkr.ecr.us-east-1.amazonaws.com/node-appointment       # Or whatever your actual repo name is
-  IMAGE_TAG: latest
 
 jobs:
   deploy:
