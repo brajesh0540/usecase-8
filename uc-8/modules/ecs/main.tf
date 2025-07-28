@@ -59,6 +59,11 @@ resource "aws_ecs_task_definition" "task" {
   ])
 }
 
+resource "aws_cloudwatch_log_group" "ecs_appointment_logs" {
+  name              = "/ecs/appointment-service"
+  retention_in_days = 7
+}
+
   resource "aws_ecs_service" "ecs_service" {
   for_each = var.services
   name            = each.key
