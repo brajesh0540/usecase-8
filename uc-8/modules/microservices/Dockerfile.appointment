@@ -6,5 +6,5 @@ RUN node -v && \
     npm init -y && \
     npm install express
 
-EXPOSE 8080
+EXPOSE 80
 CMD ["node", "appointment-service.js"]
